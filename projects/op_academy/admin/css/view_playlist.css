@@ -1,0 +1,197 @@
+/* CONTENT DESCRIPTION */
+.wrapper {
+    width: 85%;
+    margin: 50px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content {
+    width: 50%;
+    margin: 0px 25px;
+    transition: 0.4s ease;
+}
+
+.content:hover {
+    transform: translateY(-10px);
+}
+
+.content h2 {
+    font-size: 30px;
+}
+
+.content p {
+    font-size: 19px;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+.image {
+    width: 50%;
+    transition: 0.4s ease;
+}
+
+.image:hover {
+    transform: translateY(-10px);
+}
+
+.image img {
+    width: 100%;
+    height: auto !important;
+    border-radius: 10px;
+}
+/* CONTENT DESCRIPTION */
+
+
+
+.content-section h1{
+    font-size: 28px;
+    /* text-align: center; */
+    margin: 30px 0px;
+}
+
+.content-cards {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* justify-content: space-between; */
+    margin: auto;
+    /* align-items: center; */
+}
+
+.content-card {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 15px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.content-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.content-data {
+    padding: 20px;
+}
+
+.content-data > h2 > a {
+    color: #000 !important;
+    transition: .3s ease;
+}
+
+.content-data > h2 > a:hover {
+    text-decoration: underline;
+}
+
+.content-data h2 {
+    font-size: 22px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+
+.content-data .content-button {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.content-data .content-button a{
+    display: inline-block;
+    padding: 10px 15px;
+    color: #fff;
+    background: #618B4A;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.content-button form input {
+    color: #fff;
+    background: transparent;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: medium;
+}
+
+.content .content-button a {
+    margin: 10px 15px 0px 0px;
+}
+
+.content-data .content-button a:hover {
+    background: #396224;
+}
+
+.content-data .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    margin: 0px 10px 10px 0px;
+}
+
+.content-data i {
+    font-size: 25px;
+}
+
+.content-data i.active {
+    color: #618B4A;
+}
+
+.content-data i.inactive {
+    color: #fd7238;
+}
+
+.content-data .head .date {
+    display: flex;
+    align-items: center;
+    margin: 0px 10px 10px 0px;
+}
+
+.content-data .head .date i {
+    margin-left: 10px;
+    color: #618B4A;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+        margin-top: 12px;
+        margin: 0;
+        width: 100%;
+    }
+
+    .content {
+        margin: 0;
+    }
+
+    .content, .image {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .content h2 {
+        font-size: 25px;
+    }
+
+    .content-cards {
+        display: inline;
+    }
+
+    .content-card {
+        margin: 20px 0px;
+    }
+
+    .content-video video {
+        max-width: 100%;
+    }
+}

@@ -1,0 +1,111 @@
+<?php 
+include "admin/includes/db.php";
+include "includes/functions.php";
+
+session_start();
+
+if(isset($_POST['pay_now'])) {
+    $order_status = $_POST['order_status'];
+    $order_total_price = $_POST['order_total_price'];
+}
+
+
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Payment | LAURA AMAH</title>
+    <link rel="shortcut icon" href="admin/images/soulwhite.png" type="image/png">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body>
+    <?php include 'includes/header.php';?>
+
+        <!-- PAYMENT -->
+        <div class="container">
+            <div class="titlell">
+                <h2>Payment</h2>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <?php if(isset($_POST['order_status']) && $_POST['order_status'] == "Not paid")  { ?>
+                <?php $amount = strval($_POST['order_total_price']); ?>
+                <?php $order_id = $_POST['order_id'];?>
+                <p>Total Payment: $<?php echo $_POST['order_total_price'] ?></p>
+                    <div class="row ms-auto">
+                        <div class="place-ober col-md-4 col-sm-4 d-flex">
+                            <div id="paypal-button-container" style="margin-top: 50px;"></div>
+                            <p id="result-message"></p>
+                        </div>
+                    </div>
+
+            <?php } else if(isset($_SESSION['total']) && $_SESSION['total'] != 0) { ?>
+                <?php $amount = strval($_SESSION['total']); ?>
+                <?php $order_id = $_SESSION['order_id'];?>
+                <p>Total Payment: $<?php echo $_SESSION['total']; ?></p>
+                <div class="row ms-auto">
+                    <div class="place-ober col-md-4 col-sm-4 d-flex">
+                            <div id="paypal-button-container" style="margin-top: 50px;"></div>
+                            <p id="result-message"></p>
+                    </div>
+                </div>
+
+            <?php } else { ?>
+                <p> Kindly Log into account to view order! </p>
+           <?php } ?>
+
+
+        </div>
+    </div>
+
+
+
+    <?php include "includes/footer.php"; ?>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AWy8HSUB-EBcLDdmjZdCuA6sDJxmnL6CKCheZkK4NMpIsY3xWAND4-j3oyXVL03J2vrk9Wuj6gjiljXO&currency=USD"></script> 
+<script>
+    paypal.Buttons({
+        createOrder: (data, actions) => {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '<?php echo $amount ?>'
+                    }
+                }]
+            });
+        },
+
+        onApprove: (data, actions) => {
+            return actions.order.capture().then(function(orderData){
+                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                const transaction = orderData.purchase_units[0].payments.captures[0];
+                alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+
+                window.location.href = "includes/complete_payment.php?transaction_id="+transaction.id+"&order_id="+<?php echo $order_id ?>;
+            })
+        }
+    }).render('#paypal-button-container');
+</script>
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/countdown.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>
